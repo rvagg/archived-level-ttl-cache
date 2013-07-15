@@ -51,6 +51,8 @@ cache.get('foo', function (err, value) {
 })
 ```
 
+If you are doing anything but **UTF8** then you may want to pass in a `'valueEncoding'` option to set what encoding you want to explicitly set on `put()` and `get()` requests. You can also give a `'keyEncoding'` option if required.
+
 The cache doesn't require an explicit shut-down, instead you ought to `close()` the original `db` instance, which will halt the LevelTTL check cycle and close the underlying LevelDB store.
 
 <a name="licence"></a>

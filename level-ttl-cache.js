@@ -15,29 +15,56 @@ function LevelTTLCache (options) {
   if (!options.db._ttl)
     throw new Error('must supply a LevelUP set up with level-ttl')
 
-  this._options = options
-  this._db      = options.db.sublevel('ttl-cache/' + options.name)
+  this._options    = options
+  this._db         = options.db.sublevel('ttl-cache/' + options.name)
+  this._getputopts = { ttl: options.ttl }
+  if (options.valueEncoding)
+    this._getputopts.valueEncoding = options.valueEncoding
+  if (options.keyEncoding)
+    this._getputopts.keyEncoding = options.keyEncoding
+
+  this._loading    = {} // in-flight loading requests, so we don't double-up
+}
+
+function executeCallbacks (key, err, value) {
+  var cbs = this._loading[key]
+
+  if (!cbs)
+    return
+
+  ;delete this._loading[key]
+
+  cbs.forEach(function (callback) {
+    callback(err, value)
+  })
 }
 
 LevelTTLCache.prototype.get = function (key, callback) {
-  var self = this
+  var self    = this
+    , jsonkey = JSON.stringify(key)
 
-  this._db.get(key, function (err, value) {
+  if (this._loading[jsonkey])
+    return this._loading[jsonkey].push(callback)
+
+  this._db.get(key, this._getputopts, function (err, value) {
     if (err) {
       if (err.name != 'NotFoundError')
-        return callback(err)
+        return executeCallbacks.call(self, jsonkey, err)
+
+      if (!self._loading[jsonkey])
+        self._loading[jsonkey] = []
+      self._loading[jsonkey].push(callback)
 
       return self._options.load(key, function (err, value) {
         if (err)
           return callback(err)
+
         self._db.put(
             key
           , value
-          , { ttl: self._options.ttl }
+          , self._getputopts
           , function (err) {
-              if (err)
-                return callback(err)
-              callback(null, value)
+              executeCallbacks.call(self, jsonkey, err, err ? undefined : value)
             }
         )
       })
