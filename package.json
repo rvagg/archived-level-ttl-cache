@@ -1,0 +1,28 @@
+{
+    "name"            : "level-ttl-cache"
+  , "description"     : "A pass-through cache for arbitrary objects or binary data using LevelDB, expired by a TTL"
+  , "contributors"    : [
+        "Rod Vagg <r@va.gg> (https://github.com/rvagg)"
+    ]
+  , "keywords": [
+    ]
+  , "version"         : "0.0.0"
+  , "main"            : "level-ttl-cache.js"
+  , "dependencies"    : {
+    }
+  , "devDependencies" : {
+        "level"           : "*"
+      , "level-ttl"       : "*"
+      , "level-sublevel"  : "*"
+      , "tape"            : "*"
+      , "rimraf"          : "*"
+    }
+  , "repository"      : {
+        "type"            : "git"
+      , "url"             : "https://github.com/rvagg/level-ttl-cache.git"
+    }
+  , "scripts"         : {
+        "test"            : "node test.js"
+    }
+  , "license"         : "MIT"
+}
