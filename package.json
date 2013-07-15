@@ -5,6 +5,7 @@
         "Rod Vagg <r@va.gg> (https://github.com/rvagg)"
     ]
   , "keywords": [
+        "level", "leveldb", "levelup", "cache", "ttl"
     ]
   , "version"         : "0.0.0"
   , "main"            : "level-ttl-cache.js"
