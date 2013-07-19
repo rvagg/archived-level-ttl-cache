@@ -45,19 +45,17 @@ LevelTTLCache.prototype.get = function (key, callback) {
 
   if (this._loading[jsonkey])
     return this._loading[jsonkey].push(callback)
+  this._loading[jsonkey] = []
+  this._loading[jsonkey].push(callback)
 
   this._db.get(key, this._getputopts, function (err, value) {
     if (err) {
       if (err.name != 'NotFoundError')
         return executeCallbacks.call(self, jsonkey, err)
 
-      if (!self._loading[jsonkey])
-        self._loading[jsonkey] = []
-      self._loading[jsonkey].push(callback)
-
       return self._options.load(key, function (err, value) {
         if (err)
-          return callback(err)
+          return executeCallbacks.call(self, jsonkey, err)
 
         self._db.put(
             key
@@ -70,7 +68,7 @@ LevelTTLCache.prototype.get = function (key, callback) {
       })
     }
 
-    callback(null, value)
+    return executeCallbacks.call(self, jsonkey, null, value)
   })
 }
 
