@@ -5,8 +5,6 @@ LevelTTLCache
 
 ---------------------------------------------
 
-[![Build Status](https://secure.travis-ci.org/rvagg/level-ttl-cache.png)](http://travis-ci.org/rvagg/level-ttl-cache)
-
 [![NPM](https://nodei.co/npm/level-ttl-cache.png?downloads=true&downloadRank=true)](https://nodei.co/npm/level-ttl-cache/)
 [![NPM](https://nodei.co/npm-dl/level-ttl-cache.png?months=6&height=3)](https://nodei.co/npm/level-ttl-cache/)
 
