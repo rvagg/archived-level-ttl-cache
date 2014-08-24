@@ -1,29 +1,33 @@
 {
-    "name"            : "level-ttl-cache"
-  , "description"     : "A pass-through cache for arbitrary objects or binary data using LevelDB, expired by a TTL"
-  , "contributors"    : [
-        "Rod Vagg <r@va.gg> (https://github.com/rvagg)"
-    ]
-  , "keywords": [
-        "level", "leveldb", "levelup", "cache", "ttl"
-    ]
-  , "version"         : "0.2.0"
-  , "main"            : "level-ttl-cache.js"
-  , "dependencies"    : {
-    }
-  , "devDependencies" : {
-        "level"           : "*"
-      , "level-ttl"       : "*"
-      , "level-sublevel"  : "*"
-      , "tape"            : "*"
-      , "rimraf"          : "*"
-    }
-  , "repository"      : {
-        "type"            : "git"
-      , "url"             : "https://github.com/rvagg/level-ttl-cache.git"
-    }
-  , "scripts"         : {
-        "test"            : "node test.js"
-    }
-  , "license"         : "MIT"
+  "name": "level-ttl-cache",
+  "description": "A pass-through cache for arbitrary objects or binary data using LevelDB, expired by a TTL",
+  "contributors": [
+    "Rod Vagg <r@va.gg> (https://github.com/rvagg)"
+  ],
+  "keywords": [
+    "level",
+    "leveldb",
+    "levelup",
+    "cache",
+    "ttl"
+  ],
+  "version": "0.2.0",
+  "main": "level-ttl-cache.js",
+  "dependencies": {
+    "level-spaces": ">=1.0.1 <1.1.0-0",
+    "level-ttl": ">=2.0.0 <2.1.0-0"
+  },
+  "devDependencies": {
+    "level": ">=0.18.0 <0.19.0-0",
+    "rimraf": ">=2.2.8 <2.3.0-0",
+    "tape": ">=2.14.0 <2.15.0-0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rvagg/level-ttl-cache.git"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "license": "MIT"
 }
