@@ -11,7 +11,7 @@
     "cache",
     "ttl"
   ],
-  "version": "0.2.0",
+  "version": "1.0.0",
   "main": "level-ttl-cache.js",
   "dependencies": {
     "level-spaces": ">=1.0.1 <1.1.0-0",
